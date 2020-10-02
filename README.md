@@ -4,6 +4,7 @@
 ONBOOT="yes" is in /etc/sysconfig/network-scripts/ifcfg-eth0
 
 ##
+```bash
 cat /etc/sysconfig/network-scripts/ifcfg-ens33
 #TYPE=Ethernet
 #PROXY_METHOD=none
@@ -21,12 +22,16 @@ cat /etc/sysconfig/network-scripts/ifcfg-ens33
 #DEVICE=ens33
 #ONBOOT=yes
 
-
 TYPE=Ethernet
+PROXY_METHOD=none
 BOOTPROTO=none
 ONBOOT=yes
-PREFIX=24
+#PREFIX=24
 IPADDR=192.168.203.136
 DEVICE=ens33
-#UID=4562c89f-2c45-48a6-948d-9f982bbce60a
+UUID=83f2c89f-2c51-48a6-948d-9f982bbce60a
 DEFROUTE=yes
+GATEWAY=192.168.203.2
+DNS1=192.168.203.2
+DNS2=8.8.8.8
+```
