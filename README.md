@@ -1,5 +1,19 @@
 # network
 
+___________________________________________________________
+## ip command
+```
+ip addr show
+
+```
+
+* DNS
+```
+cat /etc/resolv.conf
+
+systemd-resolve --status
+```
+
 ## Activate a network interface on the boot
 ONBOOT="yes" is in /etc/sysconfig/network-scripts/ifcfg-eth0
 
@@ -35,3 +49,25 @@ GATEWAY=192.168.203.2
 DNS1=192.168.203.2
 DNS2=8.8.8.8
 ```
+____________________________________________________________
+* Use netplan
+```
+ls /etc/netplan/
+00-installer-config.yaml  01-installer-config.yaml
+
+cat /etc/netplan/00-installer-config.yaml
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    ens3:
+      dhcp4: false
+      addresses:
+        - 192.168.0.54/24
+      gateway4: 192.168.0.254
+      nameservers:
+        addresses: [8.8.8.8, 1.1.1.1, 127.0.0.53]
+  version: 2
+  
+netplan --debug apply
+```
+
