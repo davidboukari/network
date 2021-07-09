@@ -105,3 +105,14 @@ network:
 netplan --debug apply
 ```
 
+## Change mac addr
+## On linux
+```
+ifconfig eth0  hw ether 00:1e:21:e3:1a:1a
+```
+
+
+## On mac
+```
+ifconfig en0 ether 000:1e:21:e3:1a:1a
+```
