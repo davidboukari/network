@@ -1,5 +1,36 @@
 # network
 
+## Centos 8
+```
+cat /etc/sysconfig/network-scripts/ifcfg-ens192
+TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=dhcp
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+NAME=ens192
+UUID=523c3199-d7ae-48c9-a817-e8722b45fd20
+DEVICE=ens192
+ONBOOT=yes
+
+IPADDR=192.168.0.40
+PREFIX=24
+GATEWAY=192.168.0.254
+DNS=8.8.8.8
+
+```
+### Restart the interface
+```
+nmcli connection down ens192 && nmcli connection up ens192
+
+```
+
+
 ___________________________________________________________
 ## ip command
 ```
