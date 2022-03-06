@@ -31,6 +31,11 @@ nmcli connection down ens192 && nmcli connection up ens192
 ```
 
 
+## lshw
+```
+lshw -class network
+```
+
 ___________________________________________________________
 ## ip command
 ```
