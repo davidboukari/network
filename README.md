@@ -1,5 +1,10 @@
 # network
 
+## Route delete
+```
+sudo route del -net 0.0.0.0 gw 192.168.178.1 netmask 0.0.0.0 dev eth0
+```
+
 ## Centos 8
 ```
 cat /etc/sysconfig/network-scripts/ifcfg-ens192
