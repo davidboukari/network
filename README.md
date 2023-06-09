@@ -35,6 +35,60 @@ nmcli connection down ens192 && nmcli connection up ens192
 
 ```
 
+## Ubuntu use netplan
+```
+ls /etc/netplan/
+00-installer-config.yaml  01-installer-config.yaml
+
+cat /etc/netplan/00-installer-config.yaml
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    ens3:
+      dhcp4: false
+      addresses:
+        - 192.168.0.54/24
+      gateway4: 192.168.0.254
+      nameservers:
+        addresses: [8.8.8.8, 1.1.1.1, 127.0.0.53]
+  version: 2
+
+netplan --debug apply
+
+# 2 interfaces
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens3:
+      addresses:
+       - 192.168.2.2/24
+      dhcp4: no
+      routes:
+       - to: 192.168.2.0/24
+         via: 192.168.2.1
+         table: 101
+      routing-policy:
+       - from: 192.168.2.0/24
+         table: 101
+    ens5:
+      addresses:
+       - 192.168.22.2/24
+      dhcp4: no
+      gateway4: 192.168.22.1
+      routes:
+       - to: 192.168.22.0/24
+         via: 192.168.22.1
+         table: 102
+      routing-policy:
+        - from: 192.168.22.0/24
+          table: 102
+  
+netplan --debug apply
+```
+
+
+
 
 ## lshw
 ```
@@ -94,57 +148,7 @@ DNS1=192.168.203.2
 DNS2=8.8.8.8
 ```
 ____________________________________________________________
-* Use netplan
-```
-ls /etc/netplan/
-00-installer-config.yaml  01-installer-config.yaml
 
-cat /etc/netplan/00-installer-config.yaml
-# This is the network config written by 'subiquity'
-network:
-  ethernets:
-    ens3:
-      dhcp4: false
-      addresses:
-        - 192.168.0.54/24
-      gateway4: 192.168.0.254
-      nameservers:
-        addresses: [8.8.8.8, 1.1.1.1, 127.0.0.53]
-  version: 2
-
-netplan --debug apply
-
-# 2 interfaces
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    ens3:
-      addresses:
-       - 192.168.2.2/24
-      dhcp4: no
-      routes:
-       - to: 192.168.2.0/24
-         via: 192.168.2.1
-         table: 101
-      routing-policy:
-       - from: 192.168.2.0/24
-         table: 101
-    ens5:
-      addresses:
-       - 192.168.22.2/24
-      dhcp4: no
-      gateway4: 192.168.22.1
-      routes:
-       - to: 192.168.22.0/24
-         via: 192.168.22.1
-         table: 102
-      routing-policy:
-        - from: 192.168.22.0/24
-          table: 102
-  
-netplan --debug apply
-```
 
 ## Change mac addr
 ## On linux
